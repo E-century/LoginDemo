@@ -1,5 +1,6 @@
 package com.mydemo.ac;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,8 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mydemo.R;
 import com.mydemo.app.BaseApplication;
 import com.mydemo.utils.FormatUtil;
-import com.mydemo.view.MyEdittext;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -81,15 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
         loginUsername.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void afterTextChanged(Editable editable) {
                 checkLogin();
@@ -99,13 +92,10 @@ public class LoginActivity extends AppCompatActivity {
 
         loginPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -113,8 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                 checkPassword();
             }
         });
-
-
     }
 
     //设置底部按钮的背景颜色
@@ -135,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean usernameFlag;
-
     //检测登录
     private void checkLogin() {
         String username = loginUsername.getText().toString().trim();
@@ -147,14 +134,12 @@ public class LoginActivity extends AppCompatActivity {
                 setBtBackground(false);
                 loginUsername.setBackgroundResource(R.drawable.line_error_shape);
             } else {
-
                 usernameFlag = true;
                 errorTv.setVisibility(View.GONE);
                 setBtBackground(true);
                 loginUsername.setBackgroundResource(R.drawable.line_common_shape);
             }
         } else {
-
             usernameFlag = false;
             errorTv.setVisibility(View.GONE);
             setBtBackground(false);
@@ -165,7 +150,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean passwordFlag;
-
     public void checkPassword() {
         String password = loginPassword.getText().toString().trim();
         if (!TextUtils.isEmpty(password)) {
@@ -175,8 +159,6 @@ public class LoginActivity extends AppCompatActivity {
                 passwordFlag = false;
                 setBtBackground(false);
                 loginPassword.setBackgroundResource(R.drawable.line_error_shape);
-
-
                 return;
             } else {
                 passwordFlag = true;
@@ -191,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
             setBtBackground(false);
             errorTv.setVisibility(View.GONE);
             loginPassword.setBackgroundResource(R.drawable.line_common_shape);
-
         }
     }
 
@@ -201,6 +182,7 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.login_button:
                 //改变按钮背景
                 if (usernameFlag && passwordFlag) {
+                    buildProgressDialog();
                     Intent intent = new Intent(this, HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -220,4 +202,27 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private ProgressDialog progressDialog;
+    public void buildProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        progressDialog.setMessage("登录中");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    public void cancelProgressDialog() {
+        if (progressDialog != null)
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelProgressDialog();
+    }
 }
