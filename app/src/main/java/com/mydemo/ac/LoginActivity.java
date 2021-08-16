@@ -299,7 +299,7 @@ public class LoginActivity extends AppCompatActivity {
 		progressDialog.setCancelable(true);
 		progressDialog.show();
 	}
-
+	//关闭dialog
 	public void cancelProgressDialog() {
 		if (progressDialog != null)
 			if (progressDialog.isShowing()) {
