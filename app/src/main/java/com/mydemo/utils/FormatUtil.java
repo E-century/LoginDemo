@@ -23,7 +23,7 @@ public class FormatUtil {
 
     public static boolean isPassWord(String password) {
         //密码为空或者长度小于8位则返回false
-        if (password == null) return false;
+       if (password == null) return false;
         int i = 0;
         if (password.matches(REG_NUMBER)) i++;
         if (password.matches(REG_LOWERCASE)) i++;
@@ -32,6 +32,16 @@ public class FormatUtil {
 
         if (i < 3) return false;
         return true;
+    }
+
+    public static  boolean isUser(String user){
+        if (user ==null)
+            return false;
+        if (user.matches(REG_SYMBOL)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

@@ -1,8 +1,16 @@
 package com.mydemo.network.imp;
 
 
+import com.google.gson.Gson;
+import com.mydemo.bean.LoginBean;
+import com.mydemo.bean.LoginReqBean;
 import com.mydemo.network.config.ApiManage;
 import com.mydemo.network.interfaces.ILogin;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import rx.Completable;
+import rx.Observable;
 
 
 public class LoginImp {
@@ -22,12 +30,12 @@ public class LoginImp {
     }
 
 
-   /* public Observable<LoginTestRspBean> login(LoginTestReqBean bean) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), new Gson().toJson(bean));
-        return (mApi.login(body));
-    }*/
-
-
+    public Observable<LoginBean> login(String username, String password) {
+        return (mApi.login(username,password));
     }
+
+
+
+}
 
 

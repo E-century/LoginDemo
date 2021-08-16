@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_bg"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:text="首页"
-        android:layout_centerInParent="true"
-        android:gravity="center_vertical"
+
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/login_center_white_selector"
+        android:orientation="vertical">
 
-    </TextView>
+
+        <com.ypk.library.view.YPKTabLayoutView
+            android:id="@+id/mYPKTabLayoutView"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:tabSelectTextColor="#008ACB"
+            app:select_tab_color="@color/white"
+            app:tab_view_bg="#D1D9E0">
+
+        </com.ypk.library.view.YPKTabLayoutView>
+
+        <FrameLayout
+            android:id="@+id/main_content"
+            android:layout_below="@+id/mYPKTabLayoutView"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </RelativeLayout>
+
+
 </RelativeLayout>
