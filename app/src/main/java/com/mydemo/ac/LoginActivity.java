@@ -235,19 +235,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
 	public void loginNet() {
-		//buildProgressDialog();
-		LoginReqBean loginReqBean = new LoginReqBean();
-		loginReqBean.setName(username);
-		loginReqBean.setPassword(password);
-
 		LoginImp.getInstance().login(username, password)
 				.subscribeOn(Schedulers.newThread())
 				.observeOn(AndroidSchedulers.mainThread())
 
 				.subscribe(new Subscriber<LoginBean>() {
 					@Override
-					public void onCompleted() {
-					}
+					public void onCompleted() {}
 
 					@Override
 					public void onError(Throwable e) {
@@ -274,9 +268,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 	private String blockCharacterSet =FormatUtil.REG_SYMBOL;
-
 	private InputFilter filter = new InputFilter() {
-
 		@Override
 		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 
