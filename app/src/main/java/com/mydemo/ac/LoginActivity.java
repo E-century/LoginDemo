@@ -268,6 +268,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 	private String blockCharacterSet =FormatUtil.REG_SYMBOL;
+
 	private InputFilter filter = new InputFilter() {
 		@Override
 		public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
